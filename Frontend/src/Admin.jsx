@@ -8,7 +8,7 @@ const Admin = () => {
     const navigate = useNavigate();
 
     const handleLogout = () => {
-        localStorage.removeItem('username');
+        localStorage.clear();
         navigate("/");
     };
 

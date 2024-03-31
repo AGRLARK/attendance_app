@@ -9,6 +9,11 @@ const Report = () => {
         const signInRecordsData = JSON.parse(localStorage.getItem('signInRecords')) || [];
         const signOutRecordsData = JSON.parse(localStorage.getItem('signOutRecords')) || [];
 
+        if (!signInRecordsData || !signOutRecordsData) {
+            console.error("Error: signInRecords or signOutRecords not found in localStorage");
+            return;
+        }
+
         const groupedSignInRecords = groupRecordsByDate(signInRecordsData);
         const groupedSignOutRecords = groupRecordsByDate(signOutRecordsData);
 
@@ -21,7 +26,7 @@ const Report = () => {
 
     const groupRecordsByDate = (records) => {
         return records.reduce((acc, record) => {
-            const dateKey = new Date(record.date).toISOString().slice(0, 10);
+            const dateKey = new Date(record.date).toLocaleDateString();
             acc[dateKey] = acc[dateKey] || [];
             acc[dateKey].push(record);
             return acc;
@@ -31,9 +36,9 @@ const Report = () => {
     const mergeRecords = (signInRecords, signOutRecords) => {
         const mergedRecords = {};
         for (const dateKey in signInRecords) {
-            const signInRecord = signInRecords[dateKey][1] || { signIn: "Absent" };
-            const signOutRecord = signOutRecords[dateKey][1] || { signOut: "Absent" };
-            mergedRecords[dateKey] = { date: dateKey, ...signInRecord, ...signOutRecord };
+            const signInRecord = signInRecords[dateKey][0];
+            const signOutRecord = signOutRecords[dateKey] ? signOutRecords[dateKey][0] : { signOut: "Absent" };
+            mergedRecords[dateKey] = { date: dateKey, signIn: signInRecord, signOut: signOutRecord };
         }
         return mergedRecords;
     };
@@ -43,13 +48,13 @@ const Report = () => {
     };
 
     return (
-        <div className="container">
+        <div className="container mt-4">
             <h2>Attendance Report for {username}</h2>
             {reportData.map((record, index) => (
-                <div key={index}>
-                    <p>{record.date}</p>
-                    <p>Sign In - {record.signIn}</p>
-                    <p>Sign Out - {record.signOut}</p>
+                <div className="report-disp mt-4" key={index}>
+                    <p >{record.date}</p>
+                    <p >Sign In - {record.signIn ? new Date(record.signIn.date).toLocaleTimeString() : "Absent"}</p>
+                    <p >Sign Out - {record.signOut ? new Date(record.signOut.date).toLocaleTimeString() : "Absent"}</p>
                 </div>
             ))}
         </div>

@@ -48,7 +48,7 @@ const Home = () => {
     }
 
     const handleLogout = () => {
-        localStorage.removeItem('username');
+        localStorage.clear();
         navigate("/");
     };
 
