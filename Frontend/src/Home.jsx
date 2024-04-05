@@ -63,7 +63,7 @@ const Home = () => {
 
     return (
         <>
-            <div className="Time text-center">
+            <div className="container-home Time text-center">
                 <button onClick={handleLogout}>Log Out </button>
                 <h1 style={{ marginTop: "32px" }}>JFORCE SOLUTIONS</h1><br /><br />
                 <h2>User: {username}</h2>
@@ -72,8 +72,8 @@ const Home = () => {
                     <br /><br />
                     Current Time: {currentTime.toLocaleTimeString()}
                 </h4>
-            </div>
-            <div>
+                <div>
+                </div>
                 <>
                     <>
                         <div className="form-grp">
@@ -93,11 +93,11 @@ const Home = () => {
                         </div>
                     </>
                 </>
-            </div>
-            <div className="h5 mt-3 text-center">
-                <NavLink to={`/report/${username}`} className="btn btn-primary w-40" onSubmit={handleViewReport}>
-                    View Report
-                </NavLink>
+                <div className="h5 mt-3 text-center">
+                    <NavLink to={`/report/${username}`} className="btn btn-primary w-40" onSubmit={handleViewReport}>
+                        View Report
+                    </NavLink>
+                </div>
             </div>
         </>
     )

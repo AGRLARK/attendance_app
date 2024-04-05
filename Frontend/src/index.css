@@ -47,9 +47,68 @@ body {
   }
 }
 
+.custome-form,
+.justify-content-center,
+.custome-form-g,
+.custome-col {
+  width: 100% !important;
+}
+
+.custome-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.custome-input-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* .custome-col,
+.justify-content-center {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin: auto !important;
+} */
+
+/* .custome-form-g {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+} */
+
+.custome-form-g label {
+  margin: auto;
+  width: 68%;
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+}
+
+.form-control-input {
+  /* background-color: red !important; */
+  align-self: center;
+  margin: auto;
+  width: 70% !important;
+}
+
 .login-reg-btn {
   display: flex;
   justify-content: space-evenly;
+  gap: 2rem;
+}
+
+.login-reg-btn .custome-btn {
+  /* padding: 0 2rem; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 7rem !important;
+  max-width: 7rem !important;
 }
 
 .form-grp {
@@ -61,11 +120,156 @@ body {
 }
 
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100vh;
+  overflow: scroll;
+  width: 30vw !important;
+  height: 95vh;
+  border-radius: 8px;
+  margin-top: 4vh;
+  border: 2px solid black;
 }
+
+@media (max-width: 768px) {
+  .container {
+    width: 70vw !important;
+    height: 95vh;
+    border-radius: 8px;
+    margin-top: 4vh;
+    margin-left: 4vw;
+    border: 2px solid black;
+  }
+}
+
+.container1 {
+  border: 1px solid black;
+  /* margin: 0vw 15vw 0vw 15vw; */
+  min-width: 600px;
+  max-width: 600px;
+  height: 70%;
+  border-radius: 2vw;
+  /* margin-left: 30vw; */
+}
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .container1 {
+    background-color: pink;
+  }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .container1 {
+    background-color: purple;
+  }
+}
+
+/* Large devices (large desktops, 1200px and up) */
+.login-section {
+  width: 100vw;
+  height: 100vh;
+  /* background-color: rebeccapurple; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 1200px) {
+  .container1 {
+    background-color: yellow;
+    height: 60%;
+  }
+}
+
+@media (max-width: 380px) {
+  .container1 {
+    background-color: green;
+    height: 80%;
+  }
+
+  .login-reg-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .container1 {
+    border: 1px solid black;
+    /* margin: 0vw 15vw 0vw 15vw; */
+    min-width: 70%;
+    max-width: 70%;
+    border-radius: 2vw;
+    /* margin-left: 17vw; */
+  }
+}
+
+.container-home {
+  border: 1px solid black;
+  margin: 0vw 15vw 0vw 15vw;
+  width: 37vw;
+  border-radius: 2vw;
+  margin-left: 30vw;
+  padding: 3vh;
+  margin-top: 7vh;
+}
+
+@media (max-width: 768px) {
+  .container-home {
+    border: 1px solid black;
+    margin: 0vw 15vw 0vw 15vw;
+    width: 70vw;
+    border-radius: 2vw;
+    margin-left: 17vw;
+    padding: 3vh;
+    margin-top: 7vh;
+  }
+}
+
+.container-register {
+  height: 80vh !important;
+  border: 1px solid black;
+  width: 37vw;
+  border-radius: 2vw;
+  margin-left: 30vw;
+}
+
+.attendance-box {
+  width: 15vw;
+  border: 1px solid #000;
+  border-radius: 2px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .attendance-box {
+    width: 40vw;
+  }
+}
+
+/* .home-border {
+  position: absolute;
+  display: flex;
+  border: 2px solid black;
+  border-radius: 8px;
+  width: 38%;
+  margin-left: 30vw;
+  margin-top: 4vh;
+  height: 95vh;
+}
+
+@media (max-width: 768px) {
+  .home-border {
+    position: absolute;
+    display: flex;
+    border: 2px solid black;
+    border-radius: 8px;
+    width: 80%;
+    margin-left: 10vw;
+    margin-top: 4vh;
+    height: 95vh;
+  }
+} */
 
 table {
   width: 50%;

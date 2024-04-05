@@ -78,16 +78,12 @@ router.post("/", async (req, res) => {
     username: user.username,
     email: user.email,
     token: token,
-    signInRecords: user.signInRecords,
-    signOutRecords: user.signOutRecords,
   };
 
   await user.save();
 
   res.status(200).json({
     username: username,
-    signInRecords: user.signInRecords,
-    signOutRecords: user.signOutRecords,
     message: "logged in successfully",
   });
 });
@@ -146,7 +142,6 @@ const verifyToken = (req, res, next) => {
     if (err) {
       return res.status(401).json({ error: "Invalid token" });
     }
-
     req.user = decoded;
     next();
   });

@@ -27,7 +27,7 @@ const Admin = () => {
     }, []);
 
     return (
-        <div className="container">
+        <div className="container" style={{ marginTop: "10vh" }}>
             <Button onClick={handleLogout}>Log Out </Button>
             <h1>Admin Page</h1>
             <h2>Usernames:</h2>

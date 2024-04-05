@@ -39,7 +39,7 @@ const Register = () => {
 
     return (
         <>
-            <div style={{ height: "60vh", marginTop: "20vh" }}>
+            <div className="container-register" style={{ height: "60vh", marginTop: "10vh" }}>
                 <h1 style={{ textAlign: "center", marginTop: "32px" }}>JFORCE SOLUTIONS</h1>
                 {/* Form */}
                 <Form className=" p-4 " onSubmit={handleSubmit} action="">
@@ -48,7 +48,7 @@ const Register = () => {
                     <div className="h10 mb-2 text-center">REGISTER PAGE</div>
 
                     <Row className="justify-content-center">
-                        <Col sm={3}>
+                        <Col sm={4}>
                             <Form.Label>Username</Form.Label>
                             <Form.Control
                                 type="text"
@@ -61,7 +61,7 @@ const Register = () => {
                     </Row>
 
                     <Row className="justify-content-center">
-                        <Col sm={3}>
+                        <Col sm={4}>
                             <Form.Label>Password</Form.Label>
                             <Form.Control
                                 type="password"
@@ -74,7 +74,7 @@ const Register = () => {
                     </Row>
 
                     <Row className="justify-content-center">
-                        <Col sm={3}>
+                        <Col sm={4}>
                             <Form.Label>EMAIL ID</Form.Label>
                             <Form.Control
                                 type="email"
@@ -87,7 +87,7 @@ const Register = () => {
                     </Row>
 
                     <Row className="justify-content-center">
-                        <Col sm={3}>
+                        <Col sm={4}>
                             <Form.Label>PHONE NO</Form.Label>
                             <Form.Control
                                 type='Phone'

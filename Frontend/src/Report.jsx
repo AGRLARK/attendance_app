@@ -1,60 +1,49 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import { useParams } from "react-router-dom";
 
 const Report = () => {
-    const { username } = useParams();
     const [reportData, setReportData] = useState([]);
+    const { username } = useParams();
 
     useEffect(() => {
-        const signInRecordsData = JSON.parse(localStorage.getItem('signInRecords')) || [];
-        const signOutRecordsData = JSON.parse(localStorage.getItem('signOutRecords')) || [];
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(`http://localhost:4000/attendance-report?username=${username}`);
+                const { signInRecords, signOutRecords } = response.data;
+                const formattedReportData = mergeRecords(signInRecords, signOutRecords);
+                setReportData(formattedReportData);
+            } catch (error) {
+                console.error("Error fetching report data:", error);
+            }
+        };
 
-        if (!signInRecordsData || !signOutRecordsData) {
-            console.error("Error: signInRecords or signOutRecords not found in localStorage");
-            return;
-        }
-
-        const groupedSignInRecords = groupRecordsByDate(signInRecordsData);
-        const groupedSignOutRecords = groupRecordsByDate(signOutRecordsData);
-
-        const mergedRecords = mergeRecords(groupedSignInRecords, groupedSignOutRecords);
-
-        const formattedReportData = formatReportData(mergedRecords);
-
-        setReportData(formattedReportData);
-    }, []);
-
-    const groupRecordsByDate = (records) => {
-        return records.reduce((acc, record) => {
-            const dateKey = new Date(record.date).toLocaleDateString();
-            acc[dateKey] = acc[dateKey] || [];
-            acc[dateKey].push(record);
-            return acc;
-        }, {});
-    };
+        fetchData();
+    }, [username]);
 
     const mergeRecords = (signInRecords, signOutRecords) => {
-        const mergedRecords = {};
-        for (const dateKey in signInRecords) {
-            const signInRecord = signInRecords[dateKey][0];
-            const signOutRecord = signOutRecords[dateKey] ? signOutRecords[dateKey][0] : { signOut: "Absent" };
-            mergedRecords[dateKey] = { date: dateKey, signIn: signInRecord, signOut: signOutRecord };
+        const mergedRecords = [];
+        const maxCount = Math.max(signInRecords.length, signOutRecords.length);
+        for (let i = 0; i < maxCount; i++) {
+            const signInRecord = signInRecords[i] || { date: "Absent" };
+            const signOutRecord = signOutRecords[i] || { date: "Absent" };
+            mergedRecords.push({
+                date: new Date(signInRecord.date).toLocaleDateString(),
+                signIn: signInRecord.date !== "Absent" ? new Date(signInRecord.date).toLocaleTimeString() : "Absent",
+                signOut: signOutRecord.date !== "Absent" ? new Date(signOutRecord.date).toLocaleTimeString() : "Absent"
+            });
         }
         return mergedRecords;
     };
 
-    const formatReportData = (records) => {
-        return Object.values(records);
-    };
-
     return (
-        <div className="container mt-4">
+        <div className="container text-center ">
             <h2>Attendance Report for {username}</h2>
             {reportData.map((record, index) => (
-                <div className="report-disp mt-4" key={index}>
-                    <p >{record.date}</p>
-                    <p >Sign In - {record.signIn ? new Date(record.signIn.date).toLocaleTimeString() : "Absent"}</p>
-                    <p >Sign Out - {record.signOut ? new Date(record.signOut.date).toLocaleTimeString() : "Absent"}</p>
+                <div key={index} className="attendance-box">
+                    <p>{record.date}</p>
+                    <p>Sign in - {record.signIn}</p>
+                    <p>Sign out - {record.signOut}</p>
                 </div>
             ))}
         </div>
