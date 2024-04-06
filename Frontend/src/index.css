@@ -159,7 +159,7 @@ body {
 }
 
 .container-register {
-  border: 1px solid pink;
+  border: 1px solid black;
   /* margin: 0vw 15vw 0vw 15vw; */
   min-width: 600px;
   max-width: 600px;
