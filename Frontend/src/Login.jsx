@@ -14,6 +14,7 @@ const Login = () => {
 
         // Redirect to admin page
         if (inputUsername === "admin" && inputPassword === "admin") {
+            localStorage.setItem('isAdmin', true);
             navigate("/admin");
             return;
         }
@@ -45,7 +46,7 @@ const Login = () => {
     return (
         <>
             <div className="login-section">
-                <div className="container1" style={{}}>
+                <div className="container1">
                     <h1 style={{ textAlign: "center", marginTop: "32px" }}>JFORCE SOLUTIONS</h1>
                     {/* Form */}
                     <Form className="custome-form " onSubmit={handleSubmit}>
@@ -54,7 +55,7 @@ const Login = () => {
                         <div className="h10 mb-2 text-center">LOGIN PAGE</div>
                         <div className="custome-input-box">
                             <Row className="justify-content-center">
-                                <Col sm={4} className="custome-col">
+                                <Col className="custome-col">
                                     <Form.Group className="custome-form-g" controlId="username">
                                         <Form.Label>Username</Form.Label>
                                         <Form.Control

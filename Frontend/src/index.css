@@ -54,6 +54,13 @@ body {
   width: 100% !important;
 }
 
+.register-col,
+.justify-content-center,
+.custome-form-g,
+.custome-col {
+  width: 100% !important;
+}
+
 .custome-form {
   display: flex;
   flex-direction: column;
@@ -65,21 +72,6 @@ body {
   flex-direction: column;
   gap: 0.5rem;
 }
-
-/* .custome-col,
-.justify-content-center {
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  margin: auto !important;
-} */
-
-/* .custome-form-g {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  flex-direction: column;
-} */
 
 .custome-form-g label {
   margin: auto;
@@ -102,7 +94,22 @@ body {
   gap: 2rem;
 }
 
+.register-reg-btn {
+  margin-top: 20%;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 2rem;
+}
+
 .login-reg-btn .custome-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 7rem !important;
+  max-width: 7rem !important;
+}
+
+.register-reg-btn .custome-btn {
   /* padding: 0 2rem; */
   display: flex;
   align-items: center;
@@ -112,7 +119,7 @@ body {
 }
 
 .form-grp {
-  margin-top: 30vh;
+  margin-top: 10vh;
 }
 
 .Time {
@@ -122,16 +129,18 @@ body {
 .container {
   overflow: scroll;
   width: 30vw !important;
-  height: 95vh;
+  height: 80vh;
   border-radius: 8px;
   margin-top: 4vh;
   border: 2px solid black;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (max-width: 768px) {
   .container {
     width: 70vw !important;
-    height: 95vh;
+    height: 80vh;
     border-radius: 8px;
     margin-top: 4vh;
     margin-left: 4vw;
@@ -148,40 +157,59 @@ body {
   border-radius: 2vw;
   /* margin-left: 30vw; */
 }
-/* Small devices (tablets, 768px and up) */
-@media (min-width: 768px) {
-  .container1 {
-    background-color: pink;
-  }
+
+.container-register {
+  border: 1px solid pink;
+  /* margin: 0vw 15vw 0vw 15vw; */
+  min-width: 600px;
+  max-width: 600px;
+  height: 90%;
+  border-radius: 2vw;
+  /* margin-left: 30vw; */
 }
 
-/* Medium devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-  .container1 {
-    background-color: purple;
-  }
-}
-
-/* Large devices (large desktops, 1200px and up) */
 .login-section {
   width: 100vw;
   height: 100vh;
-  /* background-color: rebeccapurple; */
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1280px) {
   .container1 {
-    background-color: yellow;
     height: 60%;
+  }
+  .container-register {
+    height: 80%;
+    background-color: red;
   }
 }
 
-@media (max-width: 380px) {
+/* For 4k screen */
+@media (min-width: 2778px) {
   .container1 {
-    background-color: green;
+    background-color: yellow;
+    height: 50%;
+  }
+  .container-register {
+    background-color: pink;
+    height: 50%;
+  }
+}
+
+/* @media (min-width: 1500px) {
+  .container1 {
+    height: 60%;
+  }
+  .container-register {
+    height: 80%;
+    background-color: red;
+  }
+} */
+
+@media (max-width: 450px) {
+  .container1 {
     height: 80%;
   }
 
@@ -190,16 +218,48 @@ body {
     flex-direction: column;
     align-items: center;
   }
+
+  .form-control-input::placeholder {
+    font-size: 0.8rem;
+  }
+  .container-register {
+    height: 95%;
+    background-color: yellow;
+  }
+
+  .register-reg-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 370px) {
+  .container-register {
+    background-color: lightblue;
+  }
+  .register-reg-btn {
+    gap: 0.6rem;
+  }
+  .register-fields {
+    /* background-color: pink; */
+    gap: 0.6rem;
+  }
 }
 
 @media (max-width: 768px) {
   .container1 {
     border: 1px solid black;
-    /* margin: 0vw 15vw 0vw 15vw; */
     min-width: 70%;
     max-width: 70%;
     border-radius: 2vw;
-    /* margin-left: 17vw; */
+  }
+
+  .container-register {
+    border: 1px solid black;
+    min-width: 70%;
+    max-width: 70%;
+    border-radius: 2vw;
   }
 }
 
@@ -225,13 +285,29 @@ body {
   }
 }
 
-.container-register {
+.register-section {
+  height: 100vh;
+  width: 100vw;
+  background-color: #0095f8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media only screen and (min-width: 565px) and (max-width: 730px) {
+  .justify-content-center .register-reg-btn {
+    justify-content: center;
+    align-items: center;
+    background-color: yellow;
+  }
+}
+
+/* .container-register {
   height: 80vh !important;
   border: 1px solid black;
   width: 37vw;
   border-radius: 2vw;
-  margin-left: 30vw;
-}
+} */
 
 .attendance-box {
   width: 15vw;
@@ -247,30 +323,6 @@ body {
   }
 }
 
-/* .home-border {
-  position: absolute;
-  display: flex;
-  border: 2px solid black;
-  border-radius: 8px;
-  width: 38%;
-  margin-left: 30vw;
-  margin-top: 4vh;
-  height: 95vh;
-}
-
-@media (max-width: 768px) {
-  .home-border {
-    position: absolute;
-    display: flex;
-    border: 2px solid black;
-    border-radius: 8px;
-    width: 80%;
-    margin-left: 10vw;
-    margin-top: 4vh;
-    height: 95vh;
-  }
-} */
-
 table {
   width: 50%;
   border-collapse: collapse;
@@ -285,4 +337,32 @@ td {
 
 th {
   background-color: #f2f2f2;
+}
+
+/* Admin Page CSS */
+.container .admin-btn {
+  margin-top: 5vh;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3vh;
+  margin-left: 5rem;
+}
+
+.admin-section {
+  height: 5vh;
+  width: 25vw;
+  border: 2px solid black;
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center;
+}
+@media (max-width: 768px) {
+  .admin-section {
+    height: 5vh;
+    width: 50vw;
+    border: 2px solid black;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center;
+  }
 }

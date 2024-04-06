@@ -28,13 +28,13 @@ const Admin = () => {
 
     return (
         <div className="container" style={{ marginTop: "10vh" }}>
-            <Button onClick={handleLogout}>Log Out </Button>
+            <Button className="admin-btn" onClick={handleLogout}>Log Out </Button>
             <h1>Admin Page</h1>
-            <h2>Usernames:</h2>
+            <h4>Usernames:</h4>
             <div style={{ display: "flex", flexDirection: "column" }}>
                 {users.map((user, index) => (
                     <Link key={index} to={`/report/${user.username}`} style={{ textDecoration: "none", color: "inherit" }}>
-                        <div>{user.username}</div>
+                        <div className="admin-section" >{user.username}</div>
                     </Link>
                 ))}
             </div>

@@ -39,82 +39,98 @@ const Register = () => {
 
     return (
         <>
-            <div className="container-register" style={{ height: "60vh", marginTop: "10vh" }}>
-                <h1 style={{ textAlign: "center", marginTop: "32px" }}>JFORCE SOLUTIONS</h1>
-                {/* Form */}
-                <Form className=" p-4 " onSubmit={handleSubmit} action="">
-                    {/* Header */}
-                    <div className="h4 mb-2 text-center">ATTENDANCE APP</div>
-                    <div className="h10 mb-2 text-center">REGISTER PAGE</div>
+            <div className="register-section">
+                <div className="container-register" >
+                    <h1 style={{ textAlign: "center", marginTop: "32px" }}>JFORCE SOLUTIONS</h1>
+                    <Form className=" p-4 " onSubmit={handleSubmit} action="">
+                        <div className="h4 mb-2 text-center">ATTENDANCE APP</div>
+                        <div className="h10 mb-2 text-center">REGISTER PAGE</div>
 
-                    <Row className="justify-content-center">
-                        <Col sm={4}>
-                            <Form.Label>Username</Form.Label>
-                            <Form.Control
-                                type="text"
-                                value={inputUsername}
-                                placeholder="Enter Username"
-                                onChange={(e) => setInputUsername(e.target.value)}
-                                required
-                            />
-                        </Col>
-                    </Row>
+                        <div className="custome-input-box">
+                            <div className="register-fields">
+                                <Row className="justify-content-center">
+                                    <Col sm={4} className="register-col">
+                                        <Form.Group className="custome-form-g" controlId="username">
+                                            <Form.Label>Username</Form.Label>
+                                            <Form.Control
+                                                className="form-control-input"
+                                                type="text"
+                                                value={inputUsername}
+                                                placeholder="Enter Username"
+                                                onChange={(e) => setInputUsername(e.target.value)}
+                                                required
+                                            />
+                                        </Form.Group>
+                                    </Col>
+                                </Row>
 
-                    <Row className="justify-content-center">
-                        <Col sm={4}>
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control
-                                type="password"
-                                value={inputPassword}
-                                placeholder="Enter Password"
-                                onChange={(e) => setInputPassword(e.target.value)}
-                                required
-                            />
-                        </Col>
-                    </Row>
+                                <Row className="justify-content-center">
+                                    <Col sm={4} className="register-col">
+                                        <Form.Group className="custome-form-g" controlId="password">
+                                            <Form.Label>Password</Form.Label>
+                                            <Form.Control
+                                                className="form-control-input"
+                                                type="password"
+                                                value={inputPassword}
+                                                placeholder="Enter Password"
+                                                onChange={(e) => setInputPassword(e.target.value)}
+                                                required
+                                            />
+                                        </Form.Group>
+                                    </Col>
+                                </Row>
 
-                    <Row className="justify-content-center">
-                        <Col sm={4}>
-                            <Form.Label>EMAIL ID</Form.Label>
-                            <Form.Control
-                                type="email"
-                                value={inputEmail}
-                                placeholder="Enter Email Id"
-                                onChange={(e) => setInputEmail(e.target.value)}
-                                required
-                            />
-                        </Col>
-                    </Row>
+                                <Row className="justify-content-center">
+                                    <Col sm={4} className="register-col">
+                                        <Form.Group className="custome-form-g" controlId="email">
+                                            <Form.Label>EMAIL ID</Form.Label>
+                                            <Form.Control
+                                                className="form-control-input"
+                                                type="email"
+                                                value={inputEmail}
+                                                placeholder="Enter Email Id"
+                                                onChange={(e) => setInputEmail(e.target.value)}
+                                                required
+                                            />
+                                        </Form.Group>
+                                    </Col>
+                                </Row>
 
-                    <Row className="justify-content-center">
-                        <Col sm={4}>
-                            <Form.Label>PHONE NO</Form.Label>
-                            <Form.Control
-                                type='Phone'
-                                value={inputPhone}
-                                placeholder="Enter Phone No."
-                                onChange={(e) => setInputPhone(e.target.value)}
-                                required
-                            />
-                        </Col>
-                    </Row>
+                                <Row className="justify-content-center">
+                                    <Col sm={4} className="register-col">
+                                        <Form.Group className="custome-form-g" controlId="phone">
+                                            <Form.Label>PHONE NO</Form.Label>
+                                            <Form.Control
+                                                className="form-control-input"
+                                                type='Phone'
+                                                value={inputPhone}
+                                                placeholder="Enter Phone No."
+                                                onChange={(e) => setInputPhone(e.target.value)}
+                                                required
+                                            />
+                                        </Form.Group>
+                                    </Col>
+                                </Row>
 
 
-                    <Row className="justify-content-center" style={{ marginTop: "10vh" }}>
-                        <Col sm={5}>
-                            <div className="login-reg-btn">
-                                <Button className="w-40" variant="primary" type="submit">
-                                    Register
-                                </Button>
-                                <NavLink to="/" className="btn btn-primary w-40">
-                                    Login
-                                </NavLink>
+                                <Row className="justify-content-center" >
+                                    <Col sm={5}>
+                                        <div className="register-reg-btn">
+                                            <Button className="w-40 custome-btn" variant="primary" type="submit">
+                                                Register
+                                            </Button>
+                                            <NavLink to="/" className="btn btn-primary w-40">
+                                                Login
+                                            </NavLink>
+                                        </div>
+                                    </Col>
+                                </Row>
+
                             </div>
-                        </Col>
-                    </Row>
-                </Form>
-            </div>
-
+                        </div>
+                    </Form>
+                </div>
+            </div >
         </>
     );
 };

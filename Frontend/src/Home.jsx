@@ -31,6 +31,7 @@ const Home = () => {
         });
         alert("Marked Present Successfully");
         setShowExit(true);
+        localStorage.setItem('showExit', true);
     }
 
     const exit = async () => {
@@ -45,6 +46,7 @@ const Home = () => {
         });
         alert("Exit Successfully");
         setShowExit(false);
+        localStorage.removeItem('showExit');
     }
 
     const handleLogout = () => {
@@ -58,6 +60,8 @@ const Home = () => {
             navigate('/');
         } else {
             setUsername(storedUsername);
+            const storedShowExit = localStorage.getItem('showExit');
+            setShowExit(storedShowExit === 'true');
         }
     }, [navigate]);
 

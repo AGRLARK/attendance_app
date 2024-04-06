@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 const Report = () => {
     const [reportData, setReportData] = useState([]);
     const { username } = useParams();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -36,6 +37,16 @@ const Report = () => {
         return mergedRecords;
     };
 
+    const isAdmin = localStorage.getItem('isAdmin') === 'true';
+
+    const handleBack = () => {
+        if (isAdmin) {
+            navigate("/admin");
+        } else {
+            navigate("/home");
+        }
+    };
+
     return (
         <div className="container text-center ">
             <h2>Attendance Report for {username}</h2>
@@ -46,6 +57,9 @@ const Report = () => {
                     <p>Sign out - {record.signOut}</p>
                 </div>
             ))}
+            <button className="btn btn-primary w-40 mb-4" onClick={handleBack}>
+                Back
+            </button>
         </div>
     );
 };
