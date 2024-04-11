@@ -1,6 +1,8 @@
 body {
   font-family: Roboto, Helvetica, Arial, sans-serif;
 }
+
+/* ----------------------------------------------- */
 /* ---------- SIGN IN ---------- */
 .sign-in__wrapper {
   display: flex;
@@ -45,6 +47,10 @@ body {
   100% {
     transform: translate(0, 0);
   }
+}
+
+.justify-content-center {
+  margin-top: 2vh !important;
 }
 
 .custome-form,
@@ -155,17 +161,14 @@ body {
   max-width: 600px;
   height: 70%;
   border-radius: 2vw;
-  /* margin-left: 30vw; */
 }
 
 .container-register {
   border: 1px solid black;
-  /* margin: 0vw 15vw 0vw 15vw; */
   min-width: 600px;
   max-width: 600px;
   height: 90%;
   border-radius: 2vw;
-  /* margin-left: 30vw; */
 }
 
 .login-section {
@@ -182,31 +185,24 @@ body {
   }
   .container-register {
     height: 80%;
-    /* background-color: red; */
+  }
+}
+
+@media (max-width: 1260px) {
+  .register-section {
+    height: 120vh !important;
   }
 }
 
 /* For 4k screen */
 @media (min-width: 2778px) {
   .container1 {
-    /* background-color: yellow; */
     height: 50%;
   }
   .container-register {
-    /* background-color: pink; */
     height: 50%;
   }
 }
-
-/* @media (min-width: 1500px) {
-  .container1 {
-    height: 60%;
-  }
-  .container-register {
-    height: 80%;
-    background-color: red;
-  }
-} */
 
 @media (max-width: 450px) {
   .container1 {
@@ -232,6 +228,9 @@ body {
     flex-direction: column;
     align-items: center;
   }
+  .register-section {
+    height: 129vh !important;
+  }
 }
 
 @media (max-width: 370px) {
@@ -244,6 +243,9 @@ body {
   .register-fields {
     /* background-color: pink; */
     gap: 0.6rem;
+  }
+  .register-section {
+    height: 129vh !important;
   }
 }
 
@@ -260,6 +262,9 @@ body {
     min-width: 70%;
     max-width: 70%;
     border-radius: 2vw;
+  }
+  .register-section {
+    height: 120vh !important;
   }
 }
 
@@ -286,7 +291,7 @@ body {
 }
 
 .register-section {
-  height: 100vh;
+  height: 110vh;
   width: 100vw;
   /* background-color: #0095f8; */
   display: flex;
@@ -315,6 +320,7 @@ body {
   border-radius: 2px;
   padding: 10px;
   margin-bottom: 20px;
+  margin-left: 6vw;
 }
 
 @media (max-width: 768px) {
@@ -365,4 +371,19 @@ th {
     align-items: center !important;
     text-align: center;
   }
+
+  #container-admin a {
+    margin-left: 1.5rem !important;
+  }
+}
+
+@media (min-width: 770px) {
+  #container-admin a {
+    margin-left: 1.5rem !important;
+    width: 25vw !important;
+  }
+}
+
+#container-admin a {
+  margin-left: 1.5rem !important;
 }

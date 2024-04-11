@@ -4,47 +4,76 @@ import { NavLink, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Row, Col } from 'react-bootstrap';
 
-
 const Register = () => {
-    const [inputUsername, setInputUsername] = useState("");
-    const [inputPassword, setInputPassword] = useState("");
-    const [inputEmail, setInputEmail] = useState("");
-    const [inputPhone, setInputPhone] = useState("");
+    const [formData, setFormData] = useState({
+        username: '',
+        email: '',
+        phone: '',
+        password: ''
+    });
+    const [message, setMessage] = useState('');
+
+    const [errors, setErrors] = useState({});
+
     const navigate = useNavigate();
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        });
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch("http://localhost:4000/register", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                username: inputUsername,
-                password: inputPassword,
-                email: inputEmail,
-                phone: inputPhone,
-            }),
-        });
 
-        if (response.ok) {
-            alert("Registered Successfully");
-            navigate('/');
-        } else {
-            alert("Register Failure");
+        // Validation
+        const errors = {};
+        if (!formData.username.trim()) {
+            errors.username = "Username is required";
+        }
+        if (!formData.email.trim()) {
+            errors.email = "Email is required";
+        } else if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
+            errors.email = "Invalid email format";
+        }
+        if (!formData.phone.trim()) {
+            errors.phone = "Phone number is required";
+        } else if (formData.phone.length < 10) {
+            errors.phone = "Phone number must be at least 10 digits";
+        }
+        if (!formData.password.trim()) {
+            errors.password = "Password is required";
         }
 
-    };
+        if (Object.keys(errors).length === 0) {
+            const response = await fetch("http://localhost:4000/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData),
+            });
 
+            if (response.ok) {
+                setMessage("Registered Successfully");
+                navigate('/');
+            } else {
+                setMessage("User Already  Exist");
+            }
+        } else {
+            setErrors(errors);
+        }
+    };
 
     return (
         <>
             <div className="register-section">
                 <div className="container-register" >
-                    <h1 style={{ textAlign: "center", marginTop: "32px" }}>JFORCE SOLUTIONS</h1>
+                    {message && <div style={{ color: "red", textAlign: "center" }}> {message} </div>}
+                    <h1 style={{ textAlign: "center", marginTop: "32px" }}>REGISTER PAGE</h1>
                     <Form className=" p-4 " onSubmit={handleSubmit} action="">
-                        <div className="h4 mb-2 text-center">ATTENDANCE APP</div>
-                        <div className="h10 mb-2 text-center">REGISTER PAGE</div>
 
                         <div className="custome-input-box">
                             <div className="register-fields">
@@ -55,27 +84,12 @@ const Register = () => {
                                             <Form.Control
                                                 className="form-control-input"
                                                 type="text"
-                                                value={inputUsername}
+                                                name="username"
+                                                value={formData.username}
                                                 placeholder="Enter Username"
-                                                onChange={(e) => setInputUsername(e.target.value)}
-                                                required
+                                                onChange={handleInputChange}
                                             />
-                                        </Form.Group>
-                                    </Col>
-                                </Row>
-
-                                <Row className="justify-content-center">
-                                    <Col sm={4} className="register-col">
-                                        <Form.Group className="custome-form-g" controlId="password">
-                                            <Form.Label>Password</Form.Label>
-                                            <Form.Control
-                                                className="form-control-input"
-                                                type="password"
-                                                value={inputPassword}
-                                                placeholder="Enter Password"
-                                                onChange={(e) => setInputPassword(e.target.value)}
-                                                required
-                                            />
+                                            {errors.username && <p style={{ color: "red", textAlign: "center", fontSize: '14px' }}>{errors.username}</p>}
                                         </Form.Group>
                                     </Col>
                                 </Row>
@@ -87,11 +101,12 @@ const Register = () => {
                                             <Form.Control
                                                 className="form-control-input"
                                                 type="email"
-                                                value={inputEmail}
+                                                name="email"
+                                                value={formData.email}
                                                 placeholder="Enter Email Id"
-                                                onChange={(e) => setInputEmail(e.target.value)}
-                                                required
+                                                onChange={handleInputChange}
                                             />
+                                            {errors.email && <p style={{ color: "red", textAlign: "center", fontSize: '14px' }}>{errors.email}</p>}
                                         </Form.Group>
                                     </Col>
                                 </Row>
@@ -103,20 +118,35 @@ const Register = () => {
                                             <Form.Control
                                                 className="form-control-input"
                                                 type='Phone'
-                                                value={inputPhone}
+                                                name="phone"
+                                                value={formData.phone}
                                                 placeholder="Enter Phone No."
-                                                onChange={(e) => setInputPhone(e.target.value)}
-                                                required
+                                                onChange={handleInputChange}
                                             />
+                                            {errors.phone && <p style={{ color: "red", textAlign: "center", fontSize: '14px' }}>{errors.phone}</p>}
                                         </Form.Group>
                                     </Col>
                                 </Row>
-
-
+                                <Row className="justify-content-center">
+                                    <Col sm={4} className="register-col">
+                                        <Form.Group className="custome-form-g" controlId="password">
+                                            <Form.Label>Password</Form.Label>
+                                            <Form.Control
+                                                className="form-control-input"
+                                                type="password"
+                                                name="password"
+                                                value={formData.password}
+                                                placeholder="Enter Password"
+                                                onChange={handleInputChange}
+                                            />
+                                            {errors.password && <p style={{ color: "red", textAlign: "center", fontSize: '14px' }}>{errors.password}</p>}
+                                        </Form.Group>
+                                    </Col>
+                                </Row>
                                 <Row className="justify-content-center" >
                                     <Col sm={5}>
                                         <div className="register-reg-btn">
-                                            <Button className="w-40 custome-btn" variant="primary" type="submit">
+                                            <Button className="w-40 custome-btn" variant="primary" type="submit" >
                                                 Register
                                             </Button>
                                             <NavLink to="/" className="btn btn-primary w-40">
@@ -125,7 +155,6 @@ const Register = () => {
                                         </div>
                                     </Col>
                                 </Row>
-
                             </div>
                         </div>
                     </Form>

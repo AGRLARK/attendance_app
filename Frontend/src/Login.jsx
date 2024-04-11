@@ -7,6 +7,7 @@ import { Row, Col } from 'react-bootstrap';
 const Login = () => {
     const [inputUsername, setInputUsername] = useState("");
     const [inputPassword, setInputPassword] = useState("");
+    const [message, setMessage] = useState(" ");
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -36,10 +37,10 @@ const Login = () => {
             const { username, token, } = data;
             localStorage.setItem('username', username);
             localStorage.setItem('token', token);
-            alert('Login Successfully');
+            setMessage('Login Successfully');
             navigate('/home');
         } else {
-            alert('Invalid Credentials');
+            setMessage('Invalid Credentials');
         }
     }
 
@@ -47,12 +48,10 @@ const Login = () => {
         <>
             <div className="login-section">
                 <div className="container1">
-                    <h1 style={{ textAlign: "center", marginTop: "32px" }}>JFORCE SOLUTIONS</h1>
+                    {message && <div style={{ color: "red", textAlign: "center" }}> {message}</div >}
+                    <h1 style={{ textAlign: "center", marginTop: "32px" }}>LOGIN PAGE</h1>
                     {/* Form */}
                     <Form className="custome-form " onSubmit={handleSubmit}>
-                        {/* Header */}
-                        <div className="h4 mb-2 text-center">ATTENDANCE APP</div>
-                        <div className="h10 mb-2 text-center">LOGIN PAGE</div>
                         <div className="custome-input-box">
                             <Row className="justify-content-center">
                                 <Col className="custome-col">

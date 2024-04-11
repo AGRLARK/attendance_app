@@ -1,13 +1,17 @@
-import { Button } from "react-bootstrap";
+// import { Button } from "react-bootstrap";
 import { useState, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+// import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
 const Home = () => {
     const [currentTime, setCurrentTime] = useState(new Date());
     const [showExit, setShowExit] = useState(false);
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
-
+    const [message, setMessage] = useState('');
 
     setInterval(() => {
         setCurrentTime(new Date());
@@ -29,9 +33,9 @@ const Home = () => {
                 username: username
             }),
         });
-        alert("Marked Present Successfully");
         setShowExit(true);
         localStorage.setItem('showExit', true);
+        setMessage("Signed in successfully.");
     }
 
     const exit = async () => {
@@ -44,9 +48,9 @@ const Home = () => {
                 username: username
             }),
         });
-        alert("Exit Successfully");
         setShowExit(false);
         localStorage.removeItem('showExit');
+        setMessage("Sign Out Successfully.");
     }
 
     const handleLogout = () => {
@@ -67,8 +71,27 @@ const Home = () => {
 
     return (
         <>
+            <Navbar bg="primary" variant="dark">
+                <Navbar.Brand style={{ paddingLeft: "10px" }}>ATTENDANCE APP</Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="ms-auto">
+                        <NavDropdown title={username} id="basic-nav-dropdown" style={{ paddingRight: "10px" }}>
+                            {showExit ? (
+                                <NavDropdown.Item variant="danger" onClick={exit}>Sign Out</NavDropdown.Item>
+                            ) : (
+                                <NavDropdown.Item className="w-40" variant="primary" type="submit" onClick={presentSuccess}>
+                                    Sign In
+                                </NavDropdown.Item>
+                            )}
+                            <NavDropdown.Item className='log-out' onClick={handleLogout} style={{ backgroundColor: "red", color: "white" }} >Log Out</NavDropdown.Item>
+                        </NavDropdown>
+                    </Nav>
+                </Navbar.Collapse>
+            </Navbar>
             <div className="container-home Time text-center">
-                <button onClick={handleLogout}>Log Out </button>
+                {/* <button onClick={handleLogout}>Log Out </button> */}
+                {message && <div style={{ color: "red" }}>{message}</div>}
                 <h1 style={{ marginTop: "32px" }}>JFORCE SOLUTIONS</h1><br /><br />
                 <h2>User: {username}</h2>
                 <h4>
@@ -80,7 +103,7 @@ const Home = () => {
                 </div>
                 <>
                     <>
-                        <div className="form-grp">
+                        {/* <div className="form-grp">
                             <div className="login-reg-btn">
                                 {showExit ? (
                                     <Button className="w-40" variant="danger" type="submit" onClick={exit}>
@@ -94,7 +117,7 @@ const Home = () => {
                                     </div>
                                 )}
                             </div>
-                        </div>
+                        </div> */}
                     </>
                 </>
                 <div className="h5 mt-3 text-center">
