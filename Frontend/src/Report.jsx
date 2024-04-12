@@ -24,16 +24,33 @@ const Report = () => {
 
     const mergeRecords = (signInRecords, signOutRecords) => {
         const mergedRecords = [];
-        const maxCount = Math.max(signInRecords.length, signOutRecords.length);
-        for (let i = 0; i < maxCount; i++) {
-            const signInRecord = signInRecords[i] || { date: "Absent" };
-            const signOutRecord = signOutRecords[i] || { date: "Absent" };
+        const signInsByDate = {};
+        const signOutsByDate = {};
+
+        signInRecords.forEach(record => {
+            const date = new Date(record.date).toLocaleDateString();
+            if (!signInsByDate[date]) {
+                signInsByDate[date] = record;
+            }
+        });
+
+        signOutRecords.forEach(record => {
+            const date = new Date(record.date).toLocaleDateString();
+            if (!signOutsByDate[date]) {
+                signOutsByDate[date] = record;
+            }
+        });
+
+        Object.keys(signInsByDate).forEach(date => {
+            const signInRecord = signInsByDate[date];
+            const signOutRecord = signOutsByDate[date];
             mergedRecords.push({
-                date: new Date(signInRecord.date).toLocaleDateString(),
-                signIn: signInRecord.date !== "Absent" ? new Date(signInRecord.date).toLocaleTimeString() : "Absent",
-                signOut: signOutRecord.date !== "Absent" ? new Date(signOutRecord.date).toLocaleTimeString() : "Absent"
+                date,
+                signIn: signInRecord ? new Date(signInRecord.date).toLocaleTimeString() : "Absent",
+                signOut: signOutRecord ? new Date(signOutRecord.date).toLocaleTimeString() : "Absent"
             });
-        }
+        });
+
         return mergedRecords;
     };
 
