@@ -34,8 +34,10 @@ const Login = () => {
         if (response.ok) {
             const data = await response.json();
             console.log("Login Response Data:", data);
-            const { username, token, } = data;
+            const { username, token, email, phone } = data;
             localStorage.setItem('username', username);
+            localStorage.setItem('email', email);
+            localStorage.setItem('phone', phone);
             localStorage.setItem('token', token);
             setMessage('Login Successfully');
             navigate('/home');

@@ -133,12 +133,14 @@ body {
 }
 
 .container {
-  overflow: scroll;
-  width: 30vw !important;
-  height: 80vh;
+  overflow-y: scroll;
+  width: 95vw !important;
+  height: 85vh;
   border-radius: 8px;
   margin-top: 4vh;
   border: 2px solid black;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -148,7 +150,7 @@ body {
     width: 70vw !important;
     height: 80vh;
     border-radius: 8px;
-    margin-top: 4vh;
+    /* margin-top: 4vh; */
     margin-left: 4vw;
     border: 2px solid black;
   }
@@ -162,12 +164,12 @@ body {
   height: 70%;
   border-radius: 2vw;
 }
-
+/* /Register Page Container Border/ */
 .container-register {
   border: 1px solid black;
   min-width: 600px;
   max-width: 600px;
-  height: 90%;
+  height: 90% !important;
   border-radius: 2vw;
 }
 
@@ -191,6 +193,9 @@ body {
 @media (max-width: 1260px) {
   .register-section {
     height: 120vh !important;
+  }
+  .register-msg {
+    margin-left: 7vw !important;
   }
 }
 
@@ -219,8 +224,11 @@ body {
     font-size: 0.8rem;
   }
   .container-register {
-    height: 95%;
+    height: 98% !important;
     /* background-color: yellow; */
+  }
+  .register-msg {
+    margin-left: 10vw !important;
   }
 
   .register-reg-btn {
@@ -235,6 +243,7 @@ body {
 
 @media (max-width: 370px) {
   .container-register {
+    height: 98% !important;
     /* background-color: lightblue; */
   }
   .register-reg-btn {
@@ -263,6 +272,10 @@ body {
     max-width: 70%;
     border-radius: 2vw;
   }
+  .register-msg {
+    margin-left: 9vw !important;
+  }
+
   .register-section {
     height: 120vh !important;
   }
@@ -291,8 +304,8 @@ body {
 }
 
 .register-section {
-  height: 110vh;
-  width: 100vw;
+  height: 100vh;
+  width: 95vw;
   /* background-color: #0095f8; */
   display: flex;
   justify-content: center;
@@ -386,4 +399,38 @@ th {
 
 #container-admin a {
   margin-left: 1.5rem !important;
+}
+
+/* My Profile Page CSS */
+.myprofile-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 2px solid black;
+  background-color: pink;
+  height: 60vh;
+  width: 40vw !important;
+  overflow: auto;
+}
+
+.my-prof-h2 {
+  margin-top: -100px;
+}
+
+@media (max-width: 1480px) {
+  .register-msg {
+    margin-left: 19vw;
+    color: white;
+    /* border: 1px solid pink; */
+  }
+}
+
+/* Register page input bold when not filled  */
+.error-input {
+  border: 2px solid red !important;
+}
+
+.report-section-table-head tr th {
+  color: white !important;
 }

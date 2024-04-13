@@ -71,10 +71,9 @@ const Register = () => {
         <>
             <div className="register-section">
                 <div className="container-register" >
-                    {message && <div style={{ color: "red", textAlign: "center" }}> {message} </div>}
-                    <h1 style={{ textAlign: "center", marginTop: "32px" }}>REGISTER PAGE</h1>
+                    {message && <div style={{ color: "red", marginLeft: "5vw" }}> {message} </div>}
+                    <h1 style={{ marginLeft: "5vw", marginTop: "32px" }}>REGISTER PAGE</h1>
                     <Form className=" p-4 " onSubmit={handleSubmit} action="">
-
                         <div className="custome-input-box">
                             <div className="register-fields">
                                 <Row className="justify-content-center">
@@ -82,14 +81,14 @@ const Register = () => {
                                         <Form.Group className="custome-form-g" controlId="username">
                                             <Form.Label>Username</Form.Label>
                                             <Form.Control
-                                                className="form-control-input"
+                                                className={`form-control-input ${errors.username && 'error-input'}`}
                                                 type="text"
                                                 name="username"
                                                 value={formData.username}
                                                 placeholder="Enter Username"
                                                 onChange={handleInputChange}
                                             />
-                                            {errors.username && <p style={{ color: "red", textAlign: "center", fontSize: '14px' }}>{errors.username}</p>}
+                                            {errors.username && <p className="register-msg" style={{ color: "red", marginLeft: "5vw", fontSize: '16px' }}>{errors.username}</p>}
                                         </Form.Group>
                                     </Col>
                                 </Row>
@@ -99,14 +98,14 @@ const Register = () => {
                                         <Form.Group className="custome-form-g" controlId="email">
                                             <Form.Label>EMAIL ID</Form.Label>
                                             <Form.Control
-                                                className="form-control-input"
+                                                className={`form-control-input ${errors.email && 'error-input'}`}
                                                 type="email"
                                                 name="email"
                                                 value={formData.email}
                                                 placeholder="Enter Email Id"
                                                 onChange={handleInputChange}
                                             />
-                                            {errors.email && <p style={{ color: "red", textAlign: "center", fontSize: '14px' }}>{errors.email}</p>}
+                                            {errors.email && <p className="register-msg" style={{ color: "red", marginLeft: "5vw", fontSize: '16px' }}>{errors.email}</p>}
                                         </Form.Group>
                                     </Col>
                                 </Row>
@@ -116,14 +115,14 @@ const Register = () => {
                                         <Form.Group className="custome-form-g" controlId="phone">
                                             <Form.Label>PHONE NO</Form.Label>
                                             <Form.Control
-                                                className="form-control-input"
+                                                className={`form-control-input ${errors.phone && 'error-input'}`}
                                                 type='Phone'
                                                 name="phone"
                                                 value={formData.phone}
                                                 placeholder="Enter Phone No."
                                                 onChange={handleInputChange}
                                             />
-                                            {errors.phone && <p style={{ color: "red", textAlign: "center", fontSize: '14px' }}>{errors.phone}</p>}
+                                            {errors.phone && <p className="register-msg" style={{ color: "red", marginLeft: "5vw", fontSize: '16px' }}>{errors.phone}</p>}
                                         </Form.Group>
                                     </Col>
                                 </Row>
@@ -132,14 +131,14 @@ const Register = () => {
                                         <Form.Group className="custome-form-g" controlId="password">
                                             <Form.Label>Password</Form.Label>
                                             <Form.Control
-                                                className="form-control-input"
+                                                className={`form-control-input ${errors.password && 'error-input'}`}
                                                 type="password"
                                                 name="password"
                                                 value={formData.password}
                                                 placeholder="Enter Password"
                                                 onChange={handleInputChange}
                                             />
-                                            {errors.password && <p style={{ color: "red", textAlign: "center", fontSize: '14px' }}>{errors.password}</p>}
+                                            {errors.password && <p className="register-msg" style={{ color: "red", marginLeft: "5vw", fontSize: '16px' }}>{errors.password}</p>}
                                         </Form.Group>
                                     </Col>
                                 </Row>
@@ -158,7 +157,7 @@ const Register = () => {
                             </div>
                         </div>
                     </Form>
-                </div>
+                </div >
             </div >
         </>
     );

@@ -1,10 +1,11 @@
-// import { Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { useState, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 // import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import axios from 'axios';
 
 const Home = () => {
     const [currentTime, setCurrentTime] = useState(new Date());
@@ -23,20 +24,55 @@ const Home = () => {
     };
 
     const presentSuccess = async () => {
-        // Call the backend route to record sign-in time
-        await fetch('http://localhost:4000/signin', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                username: username
-            }),
-        });
-        setShowExit(true);
-        localStorage.setItem('showExit', true);
-        setMessage("Signed in successfully.");
-    }
+        // Fetch existing sign-in and sign-out records for the user
+        try {
+            const response = await axios.get(`http://localhost:4000/attendance-report?username=${username}`);
+            const { signInRecords, signOutRecords } = response.data;
+
+            // Check if there are existing records
+            const existingRecords = signInRecords.length > 0 && signOutRecords.length > 0;
+
+            // If there are existing records, prompt the user with a confirmation message
+            if (existingRecords) {
+                const confirmSignOut = window.confirm("There are existing sign-in and sign-out records. Do you want to proceed with a new sign-in?");
+                if (!confirmSignOut) {
+                    return; // If user cancels, do nothing
+                }
+            }
+
+
+            // Call the backend route to record sign-in time
+            await fetch('http://localhost:4000/signin', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    username: username
+                }),
+            });
+            setShowExit(true);
+            localStorage.setItem('showExit', true);
+            setMessage("Signed in successfully.");
+        }
+        catch (error) {
+            console.error("Error fetching existing records:", error);
+            // If there's an error fetching existing records, proceed with sign-in without prompting
+            await fetch('http://localhost:4000/signin', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    username: username
+                }),
+            });
+
+            setShowExit(true);
+            localStorage.setItem('showExit', true);
+            setMessage("Signed in successfully.");
+        }
+    };
 
     const exit = async () => {
         await fetch('http://localhost:4000/signout', {
@@ -77,22 +113,14 @@ const Home = () => {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ms-auto">
                         <NavDropdown title={username} id="basic-nav-dropdown" style={{ paddingRight: "10px" }}>
-                            {showExit ? (
-                                <NavDropdown.Item variant="danger" onClick={exit}>Sign Out</NavDropdown.Item>
-                            ) : (
-                                <NavDropdown.Item className="w-40" variant="primary" type="submit" onClick={presentSuccess}>
-                                    Sign In
-                                </NavDropdown.Item>
-                            )}
+                            <NavDropdown.Item className='myprofile' href="/myprofile" style={{ backgroundColor: "green", color: "white" }} >My Profile</NavDropdown.Item>
                             <NavDropdown.Item className='log-out' onClick={handleLogout} style={{ backgroundColor: "red", color: "white" }} >Log Out</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
             <div className="container-home Time text-center">
-                {/* <button onClick={handleLogout}>Log Out </button> */}
-                {message && <div style={{ color: "red" }}>{message}</div>}
-                <h1 style={{ marginTop: "32px" }}>JFORCE SOLUTIONS</h1><br /><br />
+                {message && <div style={{ color: message.includes("Signed in successfully.") ? "green" : "red" }}>{message}</div>}
                 <h2>User: {username}</h2>
                 <h4>
                     Today&apos;s Date: {currentTime.toLocaleDateString()}
@@ -103,7 +131,7 @@ const Home = () => {
                 </div>
                 <>
                     <>
-                        {/* <div className="form-grp">
+                        <div className="form-grp">
                             <div className="login-reg-btn">
                                 {showExit ? (
                                     <Button className="w-40" variant="danger" type="submit" onClick={exit}>
@@ -117,7 +145,7 @@ const Home = () => {
                                     </div>
                                 )}
                             </div>
-                        </div> */}
+                        </div>
                     </>
                 </>
                 <div className="h5 mt-3 text-center">

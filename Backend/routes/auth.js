@@ -77,6 +77,7 @@ router.post("/", async (req, res) => {
   req.session.user = {
     username: user.username,
     email: user.email,
+    phone: user.phone,
     token: token,
   };
 
@@ -84,6 +85,9 @@ router.post("/", async (req, res) => {
 
   res.status(200).json({
     username: username,
+    token: token,
+    email: user.email,
+    phone: user.phone,
     message: "logged in successfully",
   });
 });
@@ -162,6 +166,25 @@ router.get("/attendance-report", async (req, res) => {
 
   const { signInRecords, signOutRecords } = user;
   res.status(200).json({ signInRecords, signOutRecords });
+});
+
+// Route to fetch user information
+router.get("/myprofile", verifyToken, async (req, res) => {
+  try {
+    const user = await User.findOne({ username: req.user.username });
+    if (!user) {
+      return res.status(404).json({ error: "User Not Found" });
+    }
+    const userInfo = {
+      username: user.username,
+      email: user.email,
+      phone: user.phone,
+    };
+    res.status(200).json(userInfo);
+  } catch (error) {
+    console.error("Error fetching user information:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
 
 module.exports = router;
